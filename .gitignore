@@ -9,3 +9,5 @@ external/
 
 etc/ulnoiot.conf
 .local
+
+.DS_Store
