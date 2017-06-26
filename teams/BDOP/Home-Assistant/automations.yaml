@@ -1,0 +1,184 @@
+# Control simulated bulbs via Motion
+
+- alias: "Turn on Bulb1 when motion"
+  trigger:     
+    platform: mqtt
+    topic: bdop/motion_sensor
+    payload: 'motion'
+ 
+  action:   
+    service: mqtt.publish
+    data: {"payload": "on", "topic": "sensors/rgb1/set"}
+
+- alias: "Turn on Bulb2 when motion"
+  trigger:     
+    platform: mqtt
+    topic: bdop/motion_sensor
+    payload: 'motion'
+ 
+  action:   
+    service: mqtt.publish
+    data: {"payload": "on", "topic": "sensors/rgb2/set"}
+
+- alias: "Turn off Bulb1 when no motion"
+  trigger:     
+    platform: mqtt
+    topic: bdop/motion_sensor
+    payload: 'no_motion'
+ 
+  action:   
+    service: mqtt.publish
+    data: {"payload": "off", "topic": "sensors/rgb1/set"}
+
+- alias: "Turn off Bulb2 when no motion"
+  trigger:     
+    platform: mqtt
+    topic: bdop/motion_sensor
+    payload: 'no_motion'
+ 
+  action:   
+    service: mqtt.publish
+    data: {"payload": "off", "topic": "sensors/rgb2/set"}
+
+
+# Open/close door via certian NFC-Chip
+
+- alias: "Open door via NFC-Chip"
+  trigger:     
+    platform: mqtt
+    topic: door/tagid
+    payload: '150,195,128,65'
+ 
+  action:
+    service: mqtt.publish
+    data: {"payload": "on", "topic": "door/lock/set"}
+
+
+# Turn AC on (19°)
+
+- alias: "AC on"
+  trigger:
+    platform: mqtt
+    topic: bdop/ac/set
+    payload: 'on'
+
+  action:
+    service: mqtt.publish
+    data: {"payload": "19", "topic": "livingroom/temperature/set"}
+
+- alias: "AC off"
+  trigger:
+    platform: mqtt
+    topic: bdop/ac/set
+    payload: 'off'
+
+  action:
+    service: mqtt.publish
+    data: {"payload": "22", "topic": "livingroom/temperature/set"}
+
+
+# Spotify on/of
+
+- alias: "Spotify on"
+  trigger:
+    platform: mqtt
+    topic: bdop/spotify/set
+    payload: 'on'
+
+  action:
+    service: media_player.media_play
+
+- alias: "Spotify off"
+  trigger:     
+    platform: mqtt
+    topic: bdop/spotify/set
+    payload: 'off'
+
+  action:
+    service: media_player.media_pause
+
+
+# PartyMode on/off
+
+- alias: "PartyMode on"
+  trigger:     
+    platform: mqtt
+    topic: bdop/partymode/set
+    payload: 'on'
+
+  action:
+    service: media_player.play_media
+    data: {"media_content_type":"playlist","media_content_id":"spotify:user:kontorrecordsofficial:playlist:5Uzwkf6G0n4KuVB2NraPKw"}
+
+- alias: "PartyMode off"
+  trigger:     
+    platform: mqtt
+    topic: bdop/partymode/set
+    payload: 'off'
+
+  action:
+    service: media_player.media_pause
+
+
+# HipHop on/off
+
+- alias: "HipHop on"
+  trigger:
+    platform: mqtt
+    topic: bdop/hiphop/set
+    payload: 'on'
+
+  action:
+    service: media_player.play_media
+    data: {"media_content_type":"playlist","media_content_id":"spotify:user:spotify:playlist:37i9dQZF1DWVdgXTbYm2r0"}
+
+- alias: "HipHop off"
+  trigger:     
+    platform: mqtt
+    topic: bdop/hiphop/set
+    payload: 'off'
+
+  action:
+    service: media_player.media_pause
+
+
+# Romantic on/off
+
+- alias: "Romantic music on"
+  trigger:
+    platform: mqtt
+    topic: bdop/romantic/set
+    payload: 'on'
+
+  action:
+    service: media_player.play_media
+    data: {"media_content_type":"playlist","media_content_id":"spotify:user:swave94:playlist:3PFijt2Ujc7lMTX2noLslf"}
+
+- alias: "Romantic lighting on"
+  trigger:
+    platform: mqtt
+    topic: bdop/romantic/set
+    payload: 'on'
+
+  action:
+    service: mqtt.publish
+    data: {"payload": "255,0,0", "topic": "ledstrip/ledstrip/rgb/set"}
+
+- alias: "Romantic music off"
+  trigger:     
+    platform: mqtt
+    topic: bdop/romantic/set
+    payload: 'off'
+
+  action:
+    service: media_player.media_pause
+
+- alias: "Romantic lighting off"
+  trigger:     
+    platform: mqtt
+    topic: bdop/romantic/set
+    payload: 'off'
+
+  action:
+    service: mqtt.publish
+    data: {"payload": "off", "topic": "ledstrip/ledstrip/set"}
