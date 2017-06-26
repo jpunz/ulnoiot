@@ -53,8 +53,6 @@
     service: mqtt.publish
     data: {"payload": "on", "topic": "door/lock/set"}
 
-# TODO: close it after 5s !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
 # Turn AC on (19°)
 
