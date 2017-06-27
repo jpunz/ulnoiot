@@ -63,6 +63,10 @@ led = out
 switch = out
 output = out
 
+def pwm(name,*args,**kwargs):
+	return create_device("_pwm_output","PWM_Output",name,*args,**kwargs)
+buzzer = pwm
+
 def servo(name,*args,**kwargs):
     return create_device("_servo","Servo",name,*args,**kwargs)
 
